@@ -1,4 +1,4 @@
-/* Определяем CSS-переменные для светлой темы */
+/* --- Основные переменные для светлой темы --- */
 :root {
   --bg-color: #eef2f6;
   --text-color: #333;
@@ -13,7 +13,7 @@
   --player-bg: #2563eb;
 }
 
-/* Переопределение переменных при включении тёмной темы */
+/* --- Переменные для тёмной темы --- */
 .dark-theme {
   --bg-color: #222;
   --text-color: #e0e0e0;
@@ -28,7 +28,7 @@
   --player-bg: #333;
 }
 
-/* Глобальные стили, использующие переменные */
+/* --- Глобальные стили --- */
 body {
   font-family: Arial, sans-serif;
   background-color: var(--bg-color);
@@ -38,14 +38,13 @@ body {
   margin: 0;
 }
 
-/* Центрирующий контейнер */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
 }
 
-/* Стили шапки */
+/* --- Шапка --- */
 header {
   background-color: var(--header-bg);
   color: var(--header-text);
@@ -93,7 +92,7 @@ header nav ul li a:hover {
   opacity: 0.9;
 }
 
-/* Баннер с градиентом, текстурной накладкой и параллакс эффектом */
+/* --- Баннер --- */
 .banner {
   height: 200px;
   background: var(--banner-bg);
@@ -112,25 +111,22 @@ header nav ul li a:hover {
   left: 0;
   right: 0;
   bottom: 0;
-  /* Текстура – прозрачный узор в виде маленьких прямоугольников */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Crect width='10' height='10'/%3E%3Crect x='10' y='10' width='10' height='10'/%3E%3C/g%3E%3C/svg%3E");
   pointer-events: none;
 }
 
-/* Основной контент и отступ для плеера */
+/* --- Основной контент --- */
 main {
-  margin-bottom: 120px;
+  margin-bottom: 150px; /* Отступ под плеер */
 }
 
-/* Секции "Треки" и "О проекте" */
 .tracks-section,
 .about-section {
   text-align: center;
   margin: 40px 0;
 }
 
-/* Анимация появления (fade-in) */
-/* Изначально элементы невидимы */
+/* Эффект появления (fade-in) */
 .fade-in {
   opacity: 0;
   transform: translateY(20px);
@@ -159,7 +155,7 @@ main {
   gap: 20px;
 }
 
-/* Карточки треков с микроинтеракциями */
+/* --- Карточки треков --- */
 .track-card {
   background-color: var(--card-bg);
   border-radius: 15px;
@@ -177,7 +173,6 @@ main {
   border-color: var(--accent-color);
 }
 
-/* Подсветка активного трека */
 .track-card.active {
   border-color: var(--accent-color);
 }
@@ -204,7 +199,7 @@ main {
   color: var(--card-text);
 }
 
-/* Футер */
+/* --- Футер --- */
 footer {
   background-color: var(--footer-bg);
   color: var(--footer-text);
@@ -213,9 +208,9 @@ footer {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* Плеер – его положение обновляется через JavaScript, чтобы "следовать" за пользователем */
+/* --- Кастомный аудиоплеер --- */
 .player-container {
-  position: absolute; /* задаётся и обновляется скриптом */
+  position: absolute;
   left: 0;
   right: 0;
   background-color: var(--player-bg);
@@ -225,7 +220,48 @@ footer {
   z-index: 1000;
 }
 
-.player-container audio {
-  width: 100%;
+.custom-player {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
   max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Кнопка play/pause */
+#playPauseBtn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* Прогресс-бар */
+.progress-container {
+  flex: 1;
+  height: 5px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 5px;
+  cursor: pointer;
+  position: relative;
+}
+
+.progress {
+  background: #fff;
+  height: 100%;
+  width: 0%;
+  border-radius: 5px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+/* Временные метки */
+.time {
+  font-size: 0.9em;
+  color: #fff;
+  min-width: 40px;
+  text-align: center;
 }
