@@ -8,62 +8,18 @@ document.addEventListener("DOMContentLoaded", () => {
       : "Темная тема";
   });
 
-  /* Плеер в профиле кастомного интерфейса */
-  const audio = document.getElementById("audioPlayer");
-  const playPauseBtn = document.getElementById("playPauseBtn");
-  const progressContainer = document.querySelector(".progress-container");
-  const progress = document.querySelector(".progress");
-  const currentTimeEl = document.querySelector(".current-time");
-  const durationEl = document.querySelector(".duration");
-
-  // Функция форматирования времени (м:с)
-  function formatTime(time) {
-    const minutes = Math.floor(time / 60);
-    const seconds = Math.floor(time % 60);
-    return minutes + ':' + (seconds < 10 ? '0' : '') + seconds;
-  }
-
-  // Переключение воспроизведения
-  function togglePlayPause() {
-    if (audio.paused) {
-      audio.play();
-      playPauseBtn.textContent = 'Pause';
-    } else {
-      audio.pause();
-      playPauseBtn.textContent = 'Play';
-    }
-  }
-
-  playPauseBtn.addEventListener("click", togglePlayPause);
-
-  // Обновление индикатора времени и прогресса
-  audio.addEventListener("timeupdate", () => {
-    const { duration, currentTime } = audio;
-    const progressPercent = (currentTime / duration) * 100;
-    progress.style.width = progressPercent + '%';
-    currentTimeEl.textContent = formatTime(currentTime);
-    durationEl.textContent = isNaN(duration) ? '0:00' : formatTime(duration);
-  });
-
-  // Установка текущего времени при клике по прогресс-бару
-  progressContainer.addEventListener("click", (e) => {
-    const width = progressContainer.clientWidth;
-    const clickX = e.offsetX;
-    const duration = audio.duration;
-    audio.currentTime = (clickX / width) * duration;
-  });
-
-  // Обновляем позицию плеера, чтобы он "следовал" за положением пользователя
+  /* Обновление положения плеера, чтобы он следовал за положением пользователя */
   function updatePlayerPosition() {
     const player = document.querySelector('.player-container');
     const newTop = window.scrollY + window.innerHeight - player.offsetHeight;
     player.style.top = newTop + 'px';
   }
+  
   document.addEventListener("scroll", updatePlayerPosition);
   window.addEventListener("resize", updatePlayerPosition);
   updatePlayerPosition();
 
-  /* --- IntersectionObserver для эффекта fade-in (как ранее) --- */
+  /* IntersectionObserver для эффектов fade-in */
   const fadeElements = document.querySelectorAll('.fade-in');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => {
@@ -78,12 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /**
  * Функция, вызываемая при клике на карточку трека.
- * Обновляет источник плеера, добавляет класс active к выбранной карточке и запускает воспроизведение.
- * @param {HTMLElement} elem - Кликнутая карточка трека.
+ * Обновляет источник плеера и добавляет класс active к выбранной карточке.
+ * @param {HTMLElement} elem - Элемент карточки трека.
  * @param {string} trackSrc - Путь к аудиофайлу.
  */
 function playTrack(elem, trackSrc) {
-  document.querySelectorAll('.track-card.active').forEach(card => card.classList.remove('active'));
+  document.querySelectorAll('.track-card.active')
+          .forEach(card => card.classList.remove('active'));
   elem.classList.add('active');
 
   const audio = document.getElementById("audioPlayer");
@@ -92,8 +49,4 @@ function playTrack(elem, trackSrc) {
   audio.play().catch(error => {
     console.error("Ошибка воспроизведения:", error);
   });
-
-  // Обновляем кнопку плеера, если текущий трек был изменен
-  const playPauseBtn = document.getElementById("playPauseBtn");
-  playPauseBtn.textContent = "Pause";
 }
