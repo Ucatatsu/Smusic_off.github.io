@@ -9,16 +9,18 @@ body {
   font-family: Arial, sans-serif;
   background-color: #eef2f6;
   color: #333;
+  /* Чтобы позиционирование абсолютных элементов отсчитывалось от body */
+  position: relative;
 }
 
-/* Контейнер для центрирования содержимого */
+/* Центрирование содержимого */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 15px;
 }
 
-/* Стили шапки сайта */
+/* Шапка сайта */
 header {
   background-color: #2563eb;
   color: #fff;
@@ -36,7 +38,7 @@ header h1 {
 }
 
 header nav ul {
-  list-style-type: none;
+  list-style: none;
   display: flex;
   gap: 20px;
 }
@@ -51,7 +53,7 @@ header nav ul li a:hover {
   color: #cbd5e1;
 }
 
-/* Баннер с синим градиентом */
+/* Баннер */
 .banner {
   height: 200px;
   background: linear-gradient(135deg, #1e40af, #2563eb, #3b82f6);
@@ -61,7 +63,7 @@ header nav ul li a:hover {
 
 /* Основной контент */
 main {
-  margin-bottom: 100px; /* Отступ снизу для видимости фиксированного плеера */
+  margin-bottom: 120px; /* Резерв под плеер */
 }
 
 /* Секция треков */
@@ -83,7 +85,7 @@ main {
   gap: 20px;
 }
 
-/* Стили карточки трека */
+/* Карточки треков */
 .track-card {
   background-color: #fff;
   border-radius: 15px;
@@ -110,14 +112,14 @@ main {
 }
 
 .track-details h3 {
-  font-size: 1.2em;
   margin-bottom: 5px;
+  font-size: 1.2em;
   color: #2563eb;
 }
 
 .track-details p {
-  font-size: 0.9em;
   margin-bottom: 10px;
+  font-size: 0.9em;
   color: #555;
 }
 
@@ -128,8 +130,8 @@ main {
 }
 
 .about-section h2 {
-  font-size: 1.8em;
   margin-bottom: 15px;
+  font-size: 1.8em;
   color: #2563eb;
 }
 
@@ -139,7 +141,7 @@ main {
   line-height: 1.6;
 }
 
-/* Футер сайта */
+/* Футер */
 footer {
   background-color: #1e3a8a;
   color: #fff;
@@ -147,17 +149,16 @@ footer {
   text-align: center;
 }
 
-/* Фиксированный аудиоплеер внизу экрана */
+/* Блок плеера – позиционирование через JavaScript */
 .player-container {
-  position: fixed;
-  bottom: 0;
+  position: absolute;
   left: 0;
   right: 0;
   background-color: #2563eb;
   padding: 10px 20px;
   box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.2);
-  z-index: 1000;
   text-align: center;
+  z-index: 1000;
 }
 
 .player-container audio {
