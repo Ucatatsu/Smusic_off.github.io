@@ -68,22 +68,12 @@
     </div>
   </footer>
   
-  <!-- Новый кастомный аудиоплеер: скрытый <audio> + собственные элементы управления -->
+  <!-- Аудиоплеер с нативными контролами -->
   <div class="player-container">
-    <!-- Скрытый стандартный плеер -->
-    <audio id="audioPlayer">
+    <audio controls id="audioPlayer">
       <source src="" type="audio/mp3">
       Ваш браузер не поддерживает аудио.
     </audio>
-    <!-- Кастомный интерфейс плеера -->
-    <div class="custom-player">
-      <button id="playPauseBtn" class="play">Play</button>
-      <div class="progress-container">
-         <div class="progress"></div>
-      </div>
-      <span class="time current-time">0:00</span>
-      <span class="time duration">0:00</span>
-    </div>
   </div>
   
   <script src="script.js"></script>
