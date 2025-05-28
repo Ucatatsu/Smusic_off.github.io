@@ -1,60 +1,91 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background-color: #1E3A8A;
-    color: white;
-}
-
-header {
-    padding: 20px;
-    background-color: #2563EB;
-}
-
-main {
-    margin-top: 20px;
-}
-
-button {
-    background-color: #60A5FA;
-    color: white;
-    padding: 10px;
-    border: none;
-    cursor: pointer;
-}
-
-button:hover {
-    background-color: #3B82F6;
-}
-
-footer {
-    margin-top: 50px;
-    padding: 10px;
-    background-color: #1E40AF;
-}
-/* Общие стили для страницы */
-body {
-  background-color: #f0f0f0;
-  font-family: Arial, sans-serif;
+/* Сброс базовых стилей */
+* {
   margin: 0;
-  padding: 20px;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Контейнер для карточек */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #eef2f6;
+  color: #333;
+}
+
+/* Контейнер для центрирования содержимого */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Стили шапки сайта */
+header {
+  background-color: #2563eb;
+  color: #fff;
+}
+
+header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 0;
+}
+
+header h1 {
+  font-size: 2em;
+}
+
+header nav ul {
+  list-style-type: none;
+  display: flex;
+  gap: 20px;
+}
+
+header nav ul li a {
+  text-decoration: none;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+header nav ul li a:hover {
+  color: #cbd5e1;
+}
+
+/* Баннер с синим градиентом и плавными изгибами */
+.banner {
+  height: 200px;
+  background: linear-gradient(135deg, #1e40af, #2563eb, #3b82f6);
+  border-radius: 15px;
+  margin: 20px 0;
+}
+
+/* Секция треков */
+.tracks-section {
+  margin: 40px 0;
+  text-align: center;
+}
+
+.tracks-section h2 {
+  margin-bottom: 20px;
+  font-size: 1.8em;
+  color: #1e40af;
+}
+
 .tracks-container {
   display: flex;
   flex-wrap: wrap;
-  gap: 20px;
   justify-content: center;
+  gap: 20px;
 }
 
-/* Стили карточки */
+/* Стили карточки трека */
 .track-card {
-  background-color: #ffffff;
-  border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
+  background-color: #fff;
+  border-radius: 15px;
   width: 300px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .track-card:hover {
@@ -62,26 +93,54 @@ body {
   box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
 }
 
-/* Стили для изображения карточки */
 .track-card img {
   width: 100%;
-  height: auto;
   display: block;
 }
 
-/* Стили для информации о треке */
-.track-info {
+.track-details {
   padding: 15px;
   text-align: left;
 }
 
-.track-info h3 {
-  margin: 0 0 5px;
+.track-details h3 {
   font-size: 1.2em;
+  margin-bottom: 5px;
+  color: #2563eb;
 }
 
-.track-info p {
-  margin: 0;
+.track-details p {
+  font-size: 0.9em;
+  margin-bottom: 10px;
   color: #555;
-  font-size: 0.95em;
+}
+
+audio {
+  width: 100%;
+}
+
+/* Секция "О проекте" */
+.about-section {
+  margin: 40px 0;
+  text-align: center;
+}
+
+.about-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: #2563eb;
+}
+
+.about-section p {
+  font-size: 1em;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Стили футера */
+footer {
+  background-color: #1e3a8a;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
 }
