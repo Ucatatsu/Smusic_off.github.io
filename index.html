@@ -1,9 +1,9 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SMusic - Платформа для публикации музыки</title>
+  <title>SMusic - Платформа публикации музыки</title>
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,44 +27,32 @@
   <main class="container">
     <!-- Секция треков -->
     <section id="tracks" class="tracks-section">
-      <h2>Новые Треки</h2>
+      <h2>Новые треки</h2>
       <div class="tracks-container">
         <!-- Карточка трека 1 -->
-        <div class="track-card">
+        <div class="track-card" onclick="playTrack('music/track1.mp3')">
           <img src="covers/track1.jpg" alt="Обложка трека 1">
           <div class="track-details">
-            <h3>Голый дрищ</h3>
-            <p>U.T.T.</p>
-            <audio controls>
-              <source src="music/track1.mp3" type="audio/mp3">
-              Ваш браузер не поддерживает аудио.
-            </audio>
+            <h3>Название трека 1</h3>
+            <p>Исполнитель 1</p>
           </div>
         </div>
 
         <!-- Карточка трека 2 -->
-        <div class="track-card">
+        <div class="track-card" onclick="playTrack('music/track2.mp3')">
           <img src="covers/track2.jpg" alt="Обложка трека 2">
           <div class="track-details">
-            <h3>Автобус</h3>
-            <p>U.T.T.</p>
-            <audio controls>
-              <source src="music/track2.mp3" type="audio/mp3">
-              Ваш браузер не поддерживает аудио.
-            </audio>
+            <h3>Название трека 2</h3>
+            <p>Исполнитель 2</p>
           </div>
         </div>
 
         <!-- Карточка трека 3 -->
-        <div class="track-card">
+        <div class="track-card" onclick="playTrack('music/track3.mp3')">
           <img src="covers/track3.jpg" alt="Обложка трека 3">
           <div class="track-details">
             <h3>Название трека 3</h3>
             <p>Исполнитель 3</p>
-            <audio controls>
-              <source src="music/track3.mp3" type="audio/mp3">
-              Ваш браузер не поддерживает аудио.
-            </audio>
           </div>
         </div>
         <!-- Добавьте дополнительные карточки при необходимости -->
@@ -75,7 +63,7 @@
     <section id="about" class="about-section">
       <h2>О проекте</h2>
       <p>
-        SMusic — это платформа для публикации и прослушивания музыки. Все треки и обложки читаются из статических файлов, расположенных в папках <code>music</code> и <code>covers</code>.
+        SMusic — платформа для публикации и прослушивания музыки. Аудио-файлы и изображения загружаются из статических папок <code>music</code> и <code>covers</code>.
       </p>
     </section>
   </main>
@@ -86,5 +74,15 @@
       <p>© 2025 SMusic. Все права защищены.</p>
     </div>
   </footer>
+
+  <!-- Аудиоплеер, зафиксированный внизу экрана -->
+  <div class="player-container">
+    <audio controls id="audioPlayer">
+      <source src="" type="audio/mp3">
+      Ваш браузер не поддерживает аудио.
+    </audio>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
