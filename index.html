@@ -29,7 +29,7 @@
     <section id="tracks" class="tracks-section fade-in">
       <h2>Новые треки</h2>
       <div class="tracks-container">
-        <!-- При клике функция playTrack получает этот элемент, чтобы добавить ему класс active -->
+        <!-- При клике на карточку трека вызывается playTrack -->
         <div class="track-card" onclick="playTrack(this, 'music/track1.mp3')">
           <img src="covers/track1.jpg" alt="Обложка трека 1">
           <div class="track-details">
@@ -68,12 +68,22 @@
     </div>
   </footer>
   
-  <!-- Аудиоплеер. Его вертикальное положение обновляется JavaScript‑ом, чтобы он следовал за положением пользователя -->
+  <!-- Новый кастомный аудиоплеер: скрытый <audio> + собственные элементы управления -->
   <div class="player-container">
-    <audio controls id="audioPlayer">
+    <!-- Скрытый стандартный плеер -->
+    <audio id="audioPlayer">
       <source src="" type="audio/mp3">
       Ваш браузер не поддерживает аудио.
     </audio>
+    <!-- Кастомный интерфейс плеера -->
+    <div class="custom-player">
+      <button id="playPauseBtn" class="play">Play</button>
+      <div class="progress-container">
+         <div class="progress"></div>
+      </div>
+      <span class="time current-time">0:00</span>
+      <span class="time duration">0:00</span>
+    </div>
   </div>
   
   <script src="script.js"></script>
