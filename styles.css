@@ -1,4 +1,4 @@
-/* --- Основные переменные для светлой темы --- */
+/* --- Основные CSS-переменные для светлой темы --- */
 :root {
   --bg-color: #eef2f6;
   --text-color: #333;
@@ -13,7 +13,7 @@
   --player-bg: #2563eb;
 }
 
-/* --- Переменные для тёмной темы --- */
+/* --- Переопределение для тёмной темы --- */
 .dark-theme {
   --bg-color: #222;
   --text-color: #e0e0e0;
@@ -117,7 +117,7 @@ header nav ul li a:hover {
 
 /* --- Основной контент --- */
 main {
-  margin-bottom: 150px; /* Отступ под плеер */
+  margin-bottom: 120px;
 }
 
 .tracks-section,
@@ -208,7 +208,7 @@ footer {
   transition: background-color 0.3s, color 0.3s;
 }
 
-/* --- Кастомный аудиоплеер --- */
+/* --- Стилизованный аудиоплеер --- */
 .player-container {
   position: absolute;
   left: 0;
@@ -220,48 +220,22 @@ footer {
   z-index: 1000;
 }
 
-.custom-player {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
+/* Стилизация нативного элемента audio для WebKit-браузеров */
+audio {
+  width: 100%;
   max-width: 800px;
-  margin: 0 auto;
+  outline: none;
 }
 
-/* Кнопка play/pause */
-#playPauseBtn {
-  background: none;
-  border: none;
-  color: #fff;
-  font-size: 16px;
-  cursor: pointer;
+audio::-webkit-media-controls-panel {
+  background-color: var(--player-bg) !important;
+  border-radius: 10px !important;
+  padding: 5px;
 }
 
-/* Прогресс-бар */
-.progress-container {
-  flex: 1;
-  height: 5px;
-  background: rgba(255, 255, 255, 0.4);
-  border-radius: 5px;
-  cursor: pointer;
-  position: relative;
-}
-
-.progress {
-  background: #fff;
-  height: 100%;
-  width: 0%;
-  border-radius: 5px;
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-/* Временные метки */
-.time {
-  font-size: 0.9em;
-  color: #fff;
-  min-width: 40px;
-  text-align: center;
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-volume-slider {
+  filter: invert(1);
 }
