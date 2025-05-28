@@ -1,50 +1,90 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SMusic - Публикация музыки</title>
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SMusic - Платформа для публикации музыки</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <h1>SMusic</h1>
-        <p>Платформа для публикации музыки</p>
-    </header>
-    
-    <main>
-        <input type="file" id="fileInput" accept="audio/*">
-        <button onclick="uploadFile()">Загрузить</button>
-        <audio id="audioPlayer" controls></audio>
-    </main>
+  <!-- Шапка сайта с навигацией -->
+  <header>
+    <div class="container">
+      <h1>SMusic</h1>
+      <nav>
+        <ul>
+          <li><a href="#tracks">Треки</a></li>
+          <li><a href="#about">О проекте</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
 
-    <script src="script.js"></script>
+  <!-- Баннер с синим градиентом и плавными изгибами -->
+  <section class="banner"></section>
+
+  <!-- Основной контент сайта -->
+  <main class="container">
+    <!-- Секция треков -->
+    <section id="tracks" class="tracks-section">
+      <h2>Новые Треки</h2>
+      <div class="tracks-container">
+        <!-- Карточка трека 1 -->
+        <div class="track-card">
+          <img src="covers/track1.jpg" alt="Обложка трека 1">
+          <div class="track-details">
+            <h3>Название трека 1</h3>
+            <p>Исполнитель 1</p>
+            <audio controls>
+              <source src="music/track1.mp3" type="audio/mp3">
+              Ваш браузер не поддерживает аудио.
+            </audio>
+          </div>
+        </div>
+
+        <!-- Карточка трека 2 -->
+        <div class="track-card">
+          <img src="covers/track2.jpg" alt="Обложка трека 2">
+          <div class="track-details">
+            <h3>Название трека 2</h3>
+            <p>Исполнитель 2</p>
+            <audio controls>
+              <source src="music/track2.mp3" type="audio/mp3">
+              Ваш браузер не поддерживает аудио.
+            </audio>
+          </div>
+        </div>
+
+        <!-- Карточка трека 3 -->
+        <div class="track-card">
+          <img src="covers/track3.jpg" alt="Обложка трека 3">
+          <div class="track-details">
+            <h3>Название трека 3</h3>
+            <p>Исполнитель 3</p>
+            <audio controls>
+              <source src="music/track3.mp3" type="audio/mp3">
+              Ваш браузер не поддерживает аудио.
+            </audio>
+          </div>
+        </div>
+        <!-- Добавьте дополнительные карточки при необходимости -->
+      </div>
+    </section>
+
+    <!-- Секция "О проекте" -->
+    <section id="about" class="about-section">
+      <h2>О проекте</h2>
+      <p>
+        SMusic — это платформа для публикации и прослушивания музыки. Все треки и обложки читаются из статических файлов, расположенных в папках <code>music</code> и <code>covers</code>.
+      </p>
+    </section>
+  </main>
+
+  <!-- Футер -->
+  <footer>
+    <div class="container">
+      <p>© 2025 SMusic. Все права защищены.</p>
+    </div>
+  </footer>
 </body>
 </html>
-  <div class="tracks-container">
-    <div class="track-card">
-      <img src="track1.jpg" alt="Обложка трека 1">
-      <div class="track-info">
-        <h3>Название трека 1</h3>
-        <p>Исполнитель 1</p>
-      </div>
-    </div>
-    <div class="track-card">
-      <img src="track2.jpg" alt="Обложка трека 2">
-      <div class="track-info">
-        <h3>Название трека 2</h3>
-        <p>Исполнитель 2</p>
-      </div>
-    </div>
-    <div class="track-card">
-      <img src="track3.jpg" alt="Обложка трека 3">
-      <div class="track-info">
-        <h3>Название трека 3</h3>
-        <p>Исполнитель 3</p>
-      </div>
-    </div>
-    <!-- Добавьте дополнительные карточки по необходимости -->
-  </div>
-</body>
-</html>
-
