@@ -1,0 +1,273 @@
+/* --- Основные CSS-переменные для светлой темы --- */
+:root {
+  --bg-color: #eef2f6;
+  --text-color: #333;
+  --header-bg: #2063e0;
+  --header-text: #fff;
+  --accent-color: #2563eb;
+  --card-bg: #fff;
+  --card-text: #333;
+  --footer-bg: #1e3a8a;
+  --footer-text: #fff;
+  --banner-bg: linear-gradient(135deg, #1e40af, #2563eb, #3b82f6);
+  --player-bg: #2563eb;
+}
+
+/* --- Переопределение для тёмной темы --- */
+.dark-theme {
+  --bg-color: #222;
+  --text-color: #e0e0e0;
+  --header-bg: #333;
+  --header-text: #e0e0e0;
+  --accent-color: #2563eb;
+  --card-bg: #333;
+  --card-text: #e0e0e0;
+  --footer-bg: #111;
+  --footer-text: #e0e0e0;
+  --banner-bg: linear-gradient(135deg, #111, #333, #555);
+  --player-bg: #333;
+}
+
+/* --- Глобальные стили --- */
+body {
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  position: relative;
+  transition: background-color 0.3s, color 0.3s;
+  margin: 0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* --- Шапка --- */
+header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  padding: 10px 0;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+header h1 {
+  font-size: 2em;
+}
+
+/* Ссылочный логотип SMusic с эффектом при наведении */
+.logo-link {
+  text-decoration: none;
+  color: var(--header-text);
+  transition: color 0.3s, transform 0.3s;
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
+/* Для светлой темы: при наведении логотип становится темнее */
+body:not(.dark-theme) .logo-link:hover {
+  color: #333;
+}
+
+/* В тёмной теме: логотип получает акцентный цвет */
+body.dark-theme .logo-link:hover {
+  color: var(--accent-color);
+}
+
+/* Стилизация навигационных кнопок «Треки» и «О проекте»
+   — они будут выглядеть так же, как кнопка темы */
+header nav ul li a {
+  text-decoration: none;
+  background-color: var(--accent-color);
+  color: #5f9dee;
+  padding: 8px 12px;
+  border-radius: 5px;
+  transition: background-color 0.3s, transform 0.3s, opacity 0.3s, color 0.3s;
+  display: inline-block;
+}
+
+header nav ul li a:hover {
+  opacity: 0.9;
+  transform: scale(1.1);
+  background-color: var(--footer-bg);
+}
+
+/* Расположение элементов навигации */
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+/* Стилизация переключателя темы */
+#themeToggle {
+  background-color: var(--accent-color);
+  color: #5f9dee;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: opacity 0.3s, transform 0.3s, background-color 0.3s;
+}
+
+#themeToggle:hover {
+  opacity: 0.9;
+  transform: scale(1.1);
+  background-color: var(--footer-bg);
+}
+
+/* --- Баннер --- */
+.banner {
+  height: 200px;
+  background: var(--banner-bg);
+  border-radius: 15px;
+  margin: 20px 0;
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center center;
+}
+
+.banner::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%3E%3Cg%20fill='%23ffffff'%20fill-opacity='0.05'%3E%3Crect%20width='10'%20height='10'/%3E%3Crect%20x='10'%20y='10'%20width='10'%20height='10'/%3E%3C/g%3E%3C/svg%3E");
+  pointer-events: none;
+}
+
+/* --- Основной контент --- */
+main {
+  margin-bottom: 120px;
+}
+
+.tracks-section,
+.about-section {
+  text-align: center;
+  margin: 40px 0;
+}
+
+/* Эффект появления (fade-in) */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInAnimation 0.8s forwards ease-out;
+  animation-play-state: paused;
+}
+
+@keyframes fadeInAnimation {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.tracks-section h2,
+.about-section h2 {
+  font-size: 1.8em;
+  margin-bottom: 15px;
+  color: var(--accent-color);
+}
+
+.tracks-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* --- Карточки треков --- */
+.track-card {
+  background-color: var(--card-bg);
+  border-radius: 15px;
+  width: 300px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
+  border: 2px solid transparent;
+}
+
+.track-card:hover {
+  transform: scale(1.03);
+  box-shadow: 0 8px 12px rgba(0,0,0,0.2);
+  border-color: var(--accent-color);
+}
+
+.track-card.active {
+  border-color: var(--accent-color);
+}
+
+.track-card img {
+  width: 100%;
+  display: block;
+}
+
+.track-details {
+  padding: 15px;
+  text-align: left;
+}
+
+.track-details h3 {
+  margin-bottom: 5px;
+  font-size: 1.2em;
+  color: var(--accent-color);
+}
+
+.track-details p {
+  margin-bottom: 10px;
+  font-size: 0.9em;
+  color: var(--card-text);
+}
+
+/* --- Футер --- */
+footer {
+  background-color: var(--footer-bg);
+  color: var(--footer-text);
+  padding: 20px 0;
+  text-align: center;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* --- Стилизованный аудиоплеер --- */
+.player-container {
+  position: absolute;
+  left: 0;
+  right: 0;
+  background-color: var(--player-bg);
+  padding: 10px 20px;
+  box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
+  text-align: center;
+  z-index: 1000;
+}
+
+/* Стилизация нативного элемента audio для WebKit-браузеров */
+audio {
+  width: 100%;
+  max-width: 800px;
+  outline: none;
+}
+
+audio::-webkit-media-controls-panel {
+  background-color: var(--player-bg) !important;
+  border-radius: 10px !important;
+  padding: 5px;
+}
+
+audio::-webkit-media-controls-play-button,
+audio::-webkit-media-controls-current-time-display,
+audio::-webkit-media-controls-time-remaining-display,
+audio::-webkit-media-controls-volume-slider {
+  filter: invert(1);
+}
