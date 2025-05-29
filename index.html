@@ -5,12 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>SMusic - дерьмо а не музыка</title>
   <link rel="stylesheet" href="styles.css">
-  <!-- Подключаем FontAwesome для иконок -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" 
-        integrity="sha512-HHsOC8XcKd6QdA/RSKuNbkX39Q4L0ovG6VUnFJFINol31J0I0g2CmJyYxG7hxHeK1Bk97zZ3sxV9WQui5wWZ9g==" 
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-  <!-- Стили кастомного плеера -->
-  <link rel="stylesheet" href="custom-player.css">
 </head>
 <body>
   <!-- Шапка сайта с навигацией и переключателем тем -->
@@ -32,11 +26,9 @@
   
   <!-- Основной контент -->
   <main class="container">
-    <!-- Раздел с треками -->
     <section id="tracks" class="tracks-section">
       <h2>Новые треки</h2>
       <div class="tracks-container">
-        <!-- Пример карточек треков -->
         <div class="track-card" onclick="playTrack(this, 'music/track1.mp3')">
           <img src="covers/track1.jpg" alt="Обложка трека 1">
           <div class="track-details">
@@ -51,67 +43,38 @@
             <p>U.T.T.</p>
           </div>
         </div>
-        <!-- Дополнительные карточки -->
-      </div>
-    </section>
-    
-    <!-- Новый кастомный плеер -->
-    <section id="customPlayerSection">
-      <div class="custom-player">
-        <div class="player-controls">
-          <!-- Информация о треке -->
-          <div class="track-info">
-            <div class="track-cover">
-              <img src="covers/track1.jpg" alt="Cover">
-            </div>
-            <div class="track-details">
-              <div class="track-title">Track Title</div>
-              <div class="track-artist">Artist Name</div>
-            </div>
-          </div>
-          <!-- Основные кнопки управления -->
-          <div class="main-controls">
-            <button id="prevBtn" class="control-btn"><i class="fas fa-step-backward"></i></button>
-            <button id="playPauseBtn" class="control-btn"><i class="fas fa-play"></i></button>
-            <button id="nextBtn" class="control-btn"><i class="fas fa-step-forward"></i></button>
-          </div>
-          <!-- Дополнительные функции -->
-          <div class="misc-controls">
-            <button id="shuffleBtn" class="control-btn"><i class="fas fa-random"></i></button>
-            <button id="repeatBtn" class="control-btn"><i class="fas fa-redo"></i></button>
+        <div class="track-card" onclick="playTrack(this, 'music/track3.mp3')">
+          <img src="covers/track3.jpg" alt="Обложка трека 3">
+          <div class="track-details">
+            <h3>Black seven 777</h3>
+            <p>Unknown</p>
           </div>
         </div>
-        <!-- Прогресс воспроизведения -->
-        <div class="progress-section">
-          <span id="currentTime">0:00</span>
-          <div class="progress-container">
-            <div class="progress-bar">
-              <div class="progress-fill"></div>
-            </div>
+        <div class="track-card" onclick="playTrack(this, 'music/track4.mp3')">
+          <img src="covers/track4.jpg" alt="Обложка трека 4">
+          <div class="track-details">
+            <h3>Отстойный режим</h3>
+            <p>U.T.T.</p>
           </div>
-          <span id="totalTime">0:00</span>
-        </div>
-        <!-- Контроль громкости -->
-        <div class="volume-section">
-          <button id="muteBtn" class="control-btn"><i class="fas fa-volume-up"></i></button>
-          <input type="range" id="volumeSlider" min="0" max="100" value="100">
         </div>
       </div>
     </section>
   </main>
   
-  <!-- Футер -->
   <footer>
     <div class="container">
       <p>© 2025 SMusic. Не все права защищены.</p>
     </div>
   </footer>
   
-  <!-- Подключаем Yandex Audio‑JS (замени путь на актуальный или используй CDN) -->
-  <script src="path/to/audio-js.min.js"></script>
-  <!-- Основной скрипт сайта -->
+  <!-- Аудиоплеер для главной страницы -->
+  <div class="player-container">
+    <audio controls id="audioPlayer">
+      <source src="" type="audio/mp3">
+      Ваш браузер не поддерживает аудио.
+    </audio>
+  </div>
+  
   <script src="script.js"></script>
-  <!-- Скрипт кастомного плеера -->
-  <script src="custom-player.js"></script>
 </body>
 </html>
