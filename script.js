@@ -2,8 +2,10 @@ document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
   const themeToggleBtn = document.getElementById("themeToggle");
   const audio = document.getElementById("audioPlayer"); // Может отсутствовать на некоторых страницах
+  const header = document.querySelector('header');
+  const playerContainer = document.querySelector('.player-container');
 
-  // Применение сохранённой темы (если есть)
+  // Применяем сохранённую тему
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark") {
     body.classList.add("dark-theme");
@@ -12,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
     themeToggleBtn.textContent = "Темная тема";
   }
 
-  // Переключатель темы с сохранением выбранного режима в localStorage
+  // Переключатель темы
   themeToggleBtn.addEventListener("click", () => {
     body.classList.toggle("dark-theme");
     const isDark = body.classList.contains("dark-theme");
@@ -20,9 +22,8 @@ document.addEventListener("DOMContentLoaded", () => {
     localStorage.setItem("theme", isDark ? "dark" : "light");
   });
 
-  // Если аудиоплеер присутствует, то применяем сохранённый уровень громкости и позицию воспроизведения
+  // Настройки аудиоплеера
   if (audio) {
-    // Применение сохранённого уровня громкости
     const savedVolume = localStorage.getItem("volume");
     if (savedVolume !== null) {
       audio.volume = parseFloat(savedVolume);
@@ -30,8 +31,6 @@ document.addEventListener("DOMContentLoaded", () => {
     audio.addEventListener("volumechange", () => {
       localStorage.setItem("volume", audio.volume);
     });
-
-    // Сохранение позиции воспроизведения трека
     audio.addEventListener("timeupdate", () => {
       if (audio.src) {
         localStorage.setItem("progress_" + audio.src, audio.currentTime);
@@ -39,56 +38,94 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  // Функция обновления положения плеера (если он присутствует)
-  function updatePlayerPosition() {
-    const player = document.querySelector('.player-container');
-    if (!player) return; // Если плеер отсутствует, просто выходим
-    const newTop = window.scrollY + window.innerHeight - player.offsetHeight;
-    player.style.top = newTop + 'px';
-  }
-  
-  document.addEventListener("scroll", updatePlayerPosition);
-  window.addEventListener("resize", updatePlayerPosition);
-  updatePlayerPosition();
-
-  // IntersectionObserver для эффектов плавного появления (fade-in)
-  const fadeElements = document.querySelectorAll('.fade-in');
-  const observer = new IntersectionObserver(entries => {
+  /* --- Анимация появления карточек через IntersectionObserver --- */
+  const trackCards = document.querySelectorAll('.track-card');
+  const cardObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        entry.target.style.animationPlayState = 'running';
+        entry.target.classList.add('appear');
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.2 });
-  fadeElements.forEach(el => observer.observe(el));
+  }, { threshold: 0.3 });
+  
+  trackCards.forEach(card => {
+    cardObserver.observe(card);
+  });
+  
+  /* --- Эффект следования карточки за курсором --- */
+  trackCards.forEach(card => {
+    card.addEventListener("mousemove", (e) => {
+      const rect = card.getBoundingClientRect();
+      const x = e.clientX - rect.left;
+      const y = e.clientY - rect.top;
+      const centerX = rect.width / 2;
+      const centerY = rect.height / 2;
+      const maxTilt = 15;
+      const tiltX = -((y - centerY) / centerY) * maxTilt;
+      const tiltY = ((x - centerX) / centerX) * maxTilt;
+      card.style.transform = `perspective(1000px) scale(1.05) rotateX(${tiltX}deg) rotateY(${tiltY}deg)`;
+    });
+    card.addEventListener("mouseleave", () => {
+      card.style.transform = "perspective(1000px) scale(1) rotateX(0deg) rotateY(0deg)";
+    });
+  });
+  
+  /* --- Баннер: изначально занимает 50vh, а при скролле – стандартная высота --- */
+  const banner = document.querySelector('.banner');
+  if (banner) {
+    banner.classList.add('fullscreen');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        banner.classList.remove('fullscreen');
+      } else {
+        banner.classList.add('fullscreen');
+      }
+    }, { passive: true });
+  }
+  
+  /* --- Верхняя панель (header) --- */
+  function updateTopBar() {
+    if (window.scrollY < 50) {
+      header.classList.add("header-initial");
+      header.classList.remove("header-scrolled");
+    } else {
+      header.classList.remove("header-initial");
+      header.classList.add("header-scrolled");
+    }
+  }
+  updateTopBar();
+  window.addEventListener('scroll', updateTopBar, { passive: true });
+  
+  /* --- Актуализация состояния плеера (аналогично header) --- */
+  function updatePlayer() {
+    if (window.scrollY < 50) {
+      playerContainer.classList.remove("player-scrolled");
+    } else {
+      playerContainer.classList.add("player-scrolled");
+    }
+  }
+  updatePlayer();
+  window.addEventListener('scroll', updatePlayer, { passive: true });
 });
 
 /**
- * Функция, вызываемая при клике на карточку трека.
- * Если аудиоплеер присутствует, обновляет его источник, устанавливает сохранённую позицию (если она сохранена)
- * и устанавливает активное состояние для выбранной карточки.
- * @param {HTMLElement} elem - Элемент карточки трека.
+ * Функция воспроизведения трека по клику на карточку.
+ * Обновляет источник аудио, устанавливает сохранённую позицию и отмечает активную карточку.
+ * @param {HTMLElement} elem - Карточка трека.
  * @param {string} trackSrc - Путь к аудиофайлу.
  */
 function playTrack(elem, trackSrc) {
-  // Если аудиоплеер отсутствует, прекращаем выполнение функции
   const audio = document.getElementById("audioPlayer");
   if (!audio) return;
-
-  document.querySelectorAll('.track-card.active')
-          .forEach(card => card.classList.remove('active'));
+  document.querySelectorAll('.track-card.active').forEach(card => card.classList.remove('active'));
   elem.classList.add('active');
-
   audio.src = trackSrc;
   audio.load();
-
-  // Если для данного трека ранее сохранена позиция, устанавливаем её
   const savedProgress = localStorage.getItem("progress_" + trackSrc);
   if (savedProgress !== null) {
     audio.currentTime = Number(savedProgress);
   }
-
   audio.play().catch(error => {
     console.error("Ошибка воспроизведения:", error);
   });

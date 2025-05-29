@@ -22,14 +22,13 @@
   </header>
   
   <!-- Баннер с градиентом, текстурой и параллакс‑эффектом -->
-  <section class="banner fade-in"></section>
+  <section class="banner"></section>
   
   <!-- Основной контент -->
   <main class="container">
-    <section id="tracks" class="tracks-section fade-in">
+    <section id="tracks" class="tracks-section">
       <h2>Новые треки</h2>
       <div class="tracks-container">
-        <!-- При клике на карточку трека вызывается playTrack -->
         <div class="track-card" onclick="playTrack(this, 'music/track1.mp3')">
           <img src="covers/track1.jpg" alt="Обложка трека 1">
           <div class="track-details">
@@ -54,8 +53,8 @@
         <div class="track-card" onclick="playTrack(this, 'music/track4.mp3')">
           <img src="covers/track4.jpg" alt="Обложка трека 4">
           <div class="track-details">
-            <h3>Гоблины клеш рояль</h3>
-            <p>feat. U.T.T. & Unknown</p>
+            <h3>Отстойный режим</h3>
+            <p>U.T.T.</p>
           </div>
         </div>
       </div>
@@ -68,7 +67,7 @@
     </div>
   </footer>
   
-  <!-- Аудиоплеер с нативными контролами -->
+  <!-- Аудиоплеер для главной страницы -->
   <div class="player-container">
     <audio controls id="audioPlayer">
       <source src="" type="audio/mp3">

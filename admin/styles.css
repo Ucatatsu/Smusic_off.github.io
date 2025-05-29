@@ -1,0 +1,169 @@
+/* CSS-переменные для светлой темы */
+:root {
+  --bg-color: #eef2f6;
+  --text-color: #333;
+  --header-bg: #2063e0;
+  --header-text: #fff;
+  --button-bg: #2563eb;
+  --button-bg-hover: #1a4fa0;
+  --container-bg: #fff;
+  --progress-bg: #ccc;
+  --progress-fill: #2563eb;
+}
+
+/* Переопределения для тёмной темы */
+.dark-theme {
+  --bg-color: #222;
+  --text-color: #e0e0e0;
+  --header-bg: #333;
+  --header-text: #e0e0e0;
+  --button-bg: #555;
+  --button-bg-hover: #777;
+  --container-bg: #333;
+  --progress-bg: #555;
+  --progress-fill: #777;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+/* Заголовок */
+header {
+  background-color: var(--header-bg);
+  color: var(--header-text);
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-link {
+  text-decoration: none;
+  color: var(--header-text);
+  font-size: 2em;
+  transition: transform 0.3s;
+}
+
+.logo-link:hover {
+  transform: scale(1.05);
+}
+
+/* Переключатель темы */
+#themeToggle {
+  margin-right: 15px;
+  background-color: var(--button-bg);
+  color: var(--header-text);
+  padding: 8px 12px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+#themeToggle:hover {
+  background-color: var(--button-bg-hover);
+}
+
+/* Блоки админ-сайта */
+#login-container,
+#admin-content {
+  max-width: 600px;
+  margin: 30px auto;
+  padding: 20px;
+  background-color: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+/* Поля ввода */
+input[type="file"],
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 8px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+/* Кнопки */
+button {
+  background-color: var(--button-bg);
+  color: #fff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+button:hover {
+  background-color: var(--button-bg-hover);
+}
+
+/* Прогресс-бар */
+#progress-container {
+  width: 100%;
+  background-color: var(--progress-bg);
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 10px 0;
+  height: 20px;
+}
+
+#progress-bar {
+  width: 0;
+  height: 100%;
+  background-color: var(--progress-fill);
+  transition: width 0.3s;
+}
+
+/* Список загруженных треков */
+#uploadedTracks {
+  margin-top: 20px;
+}
+
+.uploaded-track {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.uploaded-track button {
+  background-color: red;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+/* Адаптивность (мобильные устройства) */
+@media (max-width: 600px) {
+  header, #login-container, #admin-content {
+    padding: 10px;
+  }
+  .logo-link {
+    font-size: 1.5em;
+  }
+}

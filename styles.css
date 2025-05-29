@@ -1,3 +1,8 @@
+/* Плавная прокрутка */
+html {
+  scroll-behavior: smooth;
+}
+
 /* --- Основные CSS-переменные для светлой темы --- */
 :root {
   --bg-color: #eef2f6;
@@ -45,45 +50,87 @@ body {
 }
 
 /* --- Шапка --- */
+/* Начальное состояние: header занимает всю область баннера */
 header {
-  background-color: var(--header-bg);
-  color: var(--header-text);
+  position: relative;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1100;
+  background: transparent;
+  transition: background-color 0.3s, padding 0.3s, height 0.3s;
+}
+
+/* Состояние до прокрутки: header покрывает область баннера (50vh) */
+header.header-initial {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50vh;
+  background: transparent;
+}
+
+/* Состояние при прокрутке: header фиксированный, узкий, с фоном */
+header.header-scrolled {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: auto;
+  background: var(--header-bg);
   padding: 10px 0;
 }
 
+/* Внутренний контейнер */
 .header-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
 
-header h1 {
-  font-size: 2em;
+/* При первоначальном состоянии - центрирование контента */
+header.header-initial .header-container {
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
 }
 
-/* Ссылочный логотип SMusic с эффектом при наведении */
+/* Логотип */
 .logo-link {
   text-decoration: none;
   color: var(--header-text);
-  transition: color 0.3s, transform 0.3s;
+  transition: color 0.3s, transform 0.3s, font-size 0.3s;
 }
-
 .logo-link:hover {
   transform: scale(1.05);
 }
-
-/* Для светлой темы: при наведении логотип становится темнее */
 body:not(.dark-theme) .logo-link:hover {
   color: #333;
 }
-
-/* В тёмной теме: логотип получает акцентный цвет */
 body.dark-theme .logo-link:hover {
   color: var(--accent-color);
 }
 
-/* Стилизация навигационных кнопок «Треки» и «О проекте»
-   — они будут выглядеть так же, как кнопка темы */
+/* Логотип в верхней части (до прокрутки): увеличенный и центрированный */
+header.header-initial .logo-link {
+  font-size: 3em;
+  transform: scale(2.5);
+  /* Центрирование за счёт flex-контейнера в header.header-initial */
+}
+
+/* Логотип в фиксированном header: стандартный размер */
+header.header-scrolled .logo-link {
+  font-size: 2em;
+  transform: none;
+}
+
+/* Навигация */
+header nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
 header nav ul li a {
   text-decoration: none;
   background-color: var(--accent-color);
@@ -93,21 +140,13 @@ header nav ul li a {
   transition: background-color 0.3s, transform 0.3s, opacity 0.3s, color 0.3s;
   display: inline-block;
 }
-
 header nav ul li a:hover {
   opacity: 0.9;
   transform: scale(1.1);
   background-color: var(--footer-bg);
 }
 
-/* Расположение элементов навигации */
-header nav ul {
-  list-style: none;
-  display: flex;
-  gap: 20px;
-}
-
-/* Стилизация переключателя темы */
+/* Переключатель темы */
 #themeToggle {
   background-color: var(--accent-color);
   color: #5f9dee;
@@ -117,7 +156,6 @@ header nav ul {
   cursor: pointer;
   transition: opacity 0.3s, transform 0.3s, background-color 0.3s;
 }
-
 #themeToggle:hover {
   opacity: 0.9;
   transform: scale(1.1);
@@ -126,7 +164,8 @@ header nav ul {
 
 /* --- Баннер --- */
 .banner {
-  height: 200px;
+  height: 200px; /* стандартная высота */
+  transition: height 0.5s ease;
   background: var(--banner-bg);
   border-radius: 15px;
   margin: 20px 0;
@@ -135,7 +174,6 @@ header nav ul {
   background-size: cover;
   background-position: center center;
 }
-
 .banner::after {
   content: "";
   position: absolute;
@@ -143,43 +181,26 @@ header nav ul {
   left: 0;
   right: 0;
   bottom: 0;
-  background-image: url("data:image/svg+xml,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%20width='20'%20height='20'%20viewBox='0%200%2020%2020'%3E%3Cg%20fill='%23ffffff'%20fill-opacity='0.05'%3E%3Crect%20width='10'%20height='10'/%3E%3Crect%20x='10'%20y='10'%20width='10'%20height='10'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20'%3E%3Cg fill='%23ffffff' fill-opacity='0.05'%3E%3Crect width='10' height='10'/%3E%3Crect x='10' y='10' width='10' height='10'/%3E%3C/g%3E%3C/svg%3E");
   pointer-events: none;
+}
+
+/* Режим баннера: занимает 50% высоты экрана */
+.banner.fullscreen {
+  height: 50vh;
 }
 
 /* --- Основной контент --- */
 main {
   margin-bottom: 120px;
 }
-
 .tracks-section,
 .about-section {
   text-align: center;
   margin: 40px 0;
 }
 
-/* Эффект появления (fade-in) */
-.fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeInAnimation 0.8s forwards ease-out;
-  animation-play-state: paused;
-}
-
-@keyframes fadeInAnimation {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.tracks-section h2,
-.about-section h2 {
-  font-size: 1.8em;
-  margin-bottom: 15px;
-  color: var(--accent-color);
-}
-
+/* Контейнер карточек */
 .tracks-container {
   display: flex;
   flex-wrap: wrap;
@@ -194,13 +215,21 @@ main {
   width: 300px;
   overflow: hidden;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease, opacity 0.6s ease;
   cursor: pointer;
   border: 2px solid transparent;
+  
+  /* Начальное состояние для анимации появления */
+  opacity: 0;
+  transform: translateY(20px);
+}
+
+.track-card.appear {
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .track-card:hover {
-  transform: scale(1.03);
   box-shadow: 0 8px 12px rgba(0,0,0,0.2);
   border-color: var(--accent-color);
 }
@@ -241,33 +270,21 @@ footer {
 }
 
 /* --- Стилизованный аудиоплеер --- */
+/* Исходное состояние плеера — позиция в потоке (абсолютно относительно body) */
 .player-container {
   position: absolute;
   left: 0;
   right: 0;
+  bottom: 0;
   background-color: var(--player-bg);
   padding: 10px 20px;
   box-shadow: 0 -2px 5px rgba(0,0,0,0.2);
   text-align: center;
+  transition: all 0.3s ease;
   z-index: 1000;
 }
-
-/* Стилизация нативного элемента audio для WebKit-браузеров */
-audio {
-  width: 100%;
-  max-width: 800px;
-  outline: none;
-}
-
-audio::-webkit-media-controls-panel {
-  background-color: var(--player-bg) !important;
-  border-radius: 10px !important;
-  padding: 5px;
-}
-
-audio::-webkit-media-controls-play-button,
-audio::-webkit-media-controls-current-time-display,
-audio::-webkit-media-controls-time-remaining-display,
-audio::-webkit-media-controls-volume-slider {
-  filter: invert(1);
+/* При скролле плеер становится фиксированным внизу экрана */
+.player-container.player-scrolled {
+  position: fixed;
+  bottom: 0;
 }
