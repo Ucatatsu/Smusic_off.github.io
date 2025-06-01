@@ -5,13 +5,14 @@ const credentials = {
   Unknown2013: 'k3T273j'  // Ник и пароль вашего друга
 };
 
-// Функция для получения дефолтных треков
 function getDefaultTracks() {
+  // Если admin.html находится в /admin, а папка covers – в корне:
   return [
-    { name: 'track1.mp3', cover: 'covers/track1.jpg', source: 'default' },
-    { name: 'track2.mp3', cover: 'covers/track2.jpg', source: 'default' }
+    { name: 'track1.mp3', cover: '../covers/track1.jpg', source: 'default' },
+    { name: 'track2.mp3', cover: '../covers/track2.jpg', source: 'default' }
   ];
 }
+
 
 // Глобальный массив для хранения треков
 let tracks = [];
