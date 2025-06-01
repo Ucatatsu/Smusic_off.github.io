@@ -1,0 +1,416 @@
+/* ===== Глобальные переменные ===== */
+:root {
+  --background: #eef2f6;
+  --text-color: #333;
+  --header-bg: #2063e0;           /* прежний цвет заголовка */
+  --header-text: #fff;
+  --logo-color: var(--text-color);/* при светлой теме логотип – основной текст (обычно чёрный) */
+  --primary: #2563eb;
+  --primary-hover: #1a4fa0;
+  --container-bg: #fff;
+  --card-bg: #fff;
+}
+
+/* Тёмная тема */
+.dark-theme {
+  --background: #222;
+  --text-color: #e0e0e0;
+  --header-bg: #333;
+  --header-text: #e0e0e0;
+  --logo-color: #d3d3d3;          /* при тёмной теме логотип – светло-серый */
+  --primary: #555;
+  --primary-hover: #777;
+  --container-bg: #333;
+  --card-bg: #333;
+}
+
+/* ===== Базовые стили ===== */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--background);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.hidden {
+  display: none;
+}
+
+/* ===== Header ===== */
+header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between; /* Логотип слева, кнопки – справа */
+  align-items: center;
+}
+
+header h1 {
+  margin: 0;
+  font-size: 3em;         /* Логотип стал крупнее */
+  color: var(--logo-color);
+}
+
+.logo-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Контейнер для кнопок */
+.header-buttons {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+header button {
+  background: var(--primary);
+  color: var(--header-text);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+header button:hover {
+  background: var(--primary-hover);
+}
+
+/* ===== Login Section ===== */
+#loginSection {
+  text-align: center;
+  margin: 20px 0;
+}
+
+#loginSection input[type="password"] {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+#loginSection button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+#loginSection button:hover {
+  background: var(--primary-hover);
+}
+
+#loginSection p {
+  color: red;
+  margin-top: 10px;
+}
+
+/* ===== Admin Panel и карточки треков ===== */
+#adminPanel h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#progressContainer {
+  width: 100%;
+  height: 20px;
+  background: #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+
+#progressBar {
+  width: 0;
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.3s;
+}
+
+.tracks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.track-card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+}
+
+.track-card:hover {
+  transform: scale(1.05);
+}
+
+.track-card img {
+  width: 100%;
+  display: block;
+}
+
+.track-details {
+  padding: 15px;
+  text-align: left;
+}
+
+.track-details h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+
+.track-details p {
+  margin: 0 0 10px 0;
+  font-size: 0.9em;
+  color: var(--text-color);
+}
+
+.track-details button {
+  background: var(--primary);
+  color: var(--header-text);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.track-details button:hover {
+  background: var(--primary-hover);
+}
+
+/* ===== Пустая карточка для добавления трека ===== */
+.empty-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed var(--primary);
+  height: 200px;
+  width: 300px;
+  padding: 10px;
+}
+
+.empty-card .plus {
+  font-size: 3em;
+  cursor: pointer;
+  color: var(--primary);
+  transition: transform 0.3s;
+}
+
+.empty-card .plus:hover {
+  transform: scale(1.2);
+}
+
+/* ===== Разделитель между плюсами ===== */
+.empty-card .divider {
+  width: 80%;
+  border: none;
+  border-top: 1px dotted var(--primary);
+  margin: 10px 0;
+}
+/* Основные CSS-переменные для светлой темы */
+:root {
+  --background: #eef2f6;
+  --text-color: #333;
+  --header-bg: #2063e0;
+  --header-text: #fff;
+  --primary: #2563eb;
+  --primary-hover: #1a4fa0;
+  --container-bg: #fff;
+  --card-bg: #fff;
+}
+
+/* Переопределение для тёмной темы */
+.dark-theme {
+  --background: #222;
+  --text-color: #e0e0e0;
+  --header-bg: #333;
+  --header-text: #e0e0e0;
+  --primary: #555;
+  --primary-hover: #777;
+  --container-bg: #333;
+  --card-bg: #333;
+}
+
+/* Глобальные стили */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: var(--background);
+  color: var(--text-color);
+  transition: background 0.3s, color 0.3s;
+}
+.container {
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+  background: var(--container-bg);
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+/* Шапка */
+header {
+  background: var(--header-bg);
+  color: var(--header-text);
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+header h1 {
+  margin: 0;
+  font-size: 2em;
+}
+.header-buttons button {
+  background: var(--primary);
+  color: var(--header-text);
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.header-buttons button:hover {
+  background: var(--primary-hover);
+}
+
+/* Логин секция */
+#loginSection {
+  text-align: center;
+  margin: 20px 0;
+}
+#loginSection input[type="text"],
+#loginSection input[type="password"] {
+  width: 80%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+#loginSection button {
+  background: var(--primary);
+  color: #fff;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+#loginSection button:hover {
+  background: var(--primary-hover);
+}
+#loginSection p {
+  color: red;
+  margin-top: 10px;
+}
+
+/* Админ-панель и карточки треков */
+#adminPanel h2 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+#progressContainer {
+  width: 100%;
+  height: 20px;
+  background: #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+#progressBar {
+  width: 0;
+  height: 100%;
+  background: var(--primary);
+  transition: width 0.3s;
+}
+.tracks {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+/* Карточки треков */
+.track-card {
+  background: var(--card-bg);
+  border-radius: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  overflow: hidden;
+  transition: transform 0.3s;
+  cursor: pointer;
+}
+.track-card:hover {
+  transform: scale(1.05);
+}
+.track-card img {
+  width: 100%;
+  display: block;
+}
+.track-details {
+  padding: 15px;
+  text-align: left;
+}
+.track-details h3 {
+  margin: 0 0 10px 0;
+  font-size: 1.2em;
+  color: var(--primary);
+}
+.track-details button {
+  background: var(--primary);
+  color: var(--header-text);
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.track-details button:hover {
+  background: var(--primary-hover);
+}
+
+/* Пустая карточка для добавления трека */
+.empty-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 2px dashed var(--primary);
+  width: 300px;
+  height: 200px;
+  cursor: pointer;
+}
+.empty-card .plus {
+  font-size: 3em;
+  color: var(--primary);
+}

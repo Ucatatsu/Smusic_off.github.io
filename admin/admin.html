@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SASMusic - Админ-панель</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <!-- Шапка: логотип слева, кнопки справа -->
+  <header>
+    <h1>SASMusic</h1>
+    <div class="header-buttons">
+      <!-- Убедитесь, что id совпадает с тем, что используется в JS -->
+      <button id="themeToggle">Темная тема</button>
+      <button id="logoutBtn" class="hidden">Выйти</button>
+    </div>
+  </header>
+  
+  <div class="container">
+    <!-- Логин секция: теперь требуется вводить ник и пароль -->
+    <section id="loginSection">
+      <h2>Вход в админ-панель</h2>
+      <input type="text" id="adminNickname" placeholder="Введите ник">
+      <input type="password" id="adminPassword" placeholder="Введите пароль">
+      <br>
+      <button id="loginBtn">Войти</button>
+      <p id="loginError"></p>
+    </section>
+    
+    <!-- Админ-панель (скрыта до успешного входа) -->
+    <section id="adminPanel" class="hidden">
+      <h2>Список треков</h2>
+      <!-- Скрытые инпуты для выбора файлов -->
+      <input type="file" id="audioFile" accept="audio/*" class="hidden">
+      <input type="file" id="coverFile" accept="image/*" class="hidden">
+      <!-- Контейнер для прогресс-бара -->
+      <div id="progressContainer" class="hidden">
+        <div id="progressBar"></div>
+      </div>
+      <div id="tracksContainer" class="tracks">
+        <!-- Здесь будут загружаться карточки треков -->
+      </div>
+    </section>
+  </div>
+  
+  <script src="script.js"></script>
+</body>
+</html>
